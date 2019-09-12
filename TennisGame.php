@@ -1,21 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dungduong
- * Date: 10/27/2018
- * Time: 6:20 PM
- */
+
 
 class TennisGame
 {
     public $score = '';
 
-    public function getScore($player1Name, $player2Name, $m_score1, $m_score2)
+    public function getScore($player1Name, $player2Name, $score1, $score2)
     {
         $tempScore=0;
 
-        if ($m_score1==$m_score2) {
-            switch ($m_score1)
+        if ($score1==$score2) {
+            switch ($score1)
             {
                 case 0:
                     $this->score = "Love-All";
@@ -35,34 +30,38 @@ class TennisGame
 
             }
         }
-        else if ($m_score1>=4 || $m_score2>=4)
-        {
-            $minusResult = $m_score1-$m_score2;
-            if ($minusResult==1) $this->score ="Advantage player1";
-            else if ($minusResult ==-1) $this->score ="Advantage player2";
-            else if ($minusResult>=2) $this->score = "Win for player1";
-            else $this->score ="Win for player2";
-        }
-        else
-        {
-            for ($i=1; $i<3; $i++)
+        else {
+            $result = $score1 >= 4 || $score2 >= 4;
+            if ($result)
             {
-                if ($i==1) $tempScore = $m_score1;
-                else { $this->score.="-"; $tempScore = $m_score2;}
-                switch($tempScore)
+                $minusResult = $score1-$score2;
+                $lastResult = $minusResult;
+                if ($lastResult ==1) $this->score ="Advantage player1";
+                else if ($lastResult ==-1) $this->score ="Advantage player2";
+                else if ($lastResult >=2) $this->score = "Win for player1";
+                else $this->score ="Win for player2";
+            }
+            else
+            {
+                for ($i=0; $i<3; $i++)
                 {
-                    case 0:
-                        $this->score.="Love";
-                        break;
-                    case 1:
-                        $this->score.="Fifteen";
-                        break;
-                    case 2:
-                        $this->score.="Thirty";
-                        break;
-                    case 3:
-                        $this->score.="Forty";
-                        break;
+                    if ($i==1) $tempScore = $score1;
+                    else { $this->score.="-"; $tempScore = $score2;}
+                    switch($tempScore)
+                    {
+                        case 0:
+                            $this->score.="Love";
+                            break;
+                        case 1:
+                            $this->score.="Fifteen";
+                            break;
+                        case 2:
+                            $this->score.="Thirty";
+                            break;
+                        case 3:
+                            $this->score.="Forty";
+                            break;
+                    }
                 }
             }
         }

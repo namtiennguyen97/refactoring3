@@ -10,6 +10,6 @@ include ('TennisGame.php');
 
 $tennisGame = new TennisGame();
 
-$tennisGame->getScore('player1', 'player2', 6, 8);
+$tennisGame->getScore('player1', 'player2', 1, 2);
 
 echo $tennisGame;
